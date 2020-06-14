@@ -22,5 +22,15 @@ namespace proyecto1
             //link to the other class
 
         }
+
+        private void colorear()
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            colorear();
+        }
     }
 }
