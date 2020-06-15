@@ -4,6 +4,7 @@
     {
         string[] res = { };//reservadas
         string[] sim = { };// simbolos
+        string f = "";
         public void analizador(string data)
         {
 
@@ -39,12 +40,12 @@
                             //number digit or float or date
                             e = 3;
                         }
-                        else if (char.IsLetter(c) || c=='_')
+                        else if (char.IsLetter(c) || c == '_')
                         {
                             //id
                             e = 4;
                         }
-                        else if (c=='\"')
+                        else if (c == '\"')
                         {
                             //cadena dob
                             e = 5;
@@ -54,7 +55,7 @@
                             //cadena simp
                             e = 6;
                         }
-                        else if (c==' ' || c=='\t' || c=='\n')
+                        else if (c == ' ' || c == '\t' || c == '\n')
                         {
                             //carret changer
                             //nothing state
@@ -65,21 +66,36 @@
                         }
                         break;
                     case 1:
-                        if (c=='\n')
+                        if (c == '\n')
                         {
                             //end state
+                            e = 0;
                         }
                         break;
                     case 2:
                         if (c == '*' && v == '/')
                         {
                             //end state
+                            e = 0;
+                            i++;
                         }
                         break;
                     case 3:
                         //date validator here
+
                         break;
                     case 4:
+                        if (char.IsLetterOrDigit(c) || c == '_')
+                        {
+                            //id
+                            f += c;
+                        }
+                        else
+                        {
+                            //end state
+
+                            f = "";
+                        }
                         break;
                     case 5:
                         break;
