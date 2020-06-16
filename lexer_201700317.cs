@@ -4,8 +4,10 @@ namespace proyecto1
 {
     class lexer_201700317
     {
-        string[] res = { };//reservadas
-        string[] sim = { };// simbolos
+        string[] res = {"CREAR", "TABLA", "INSERTAR", "EN", "VALORES", "SELECCIONAR", "COMO", "DE", "DONDE",
+                        "Y", "O", "ELIMINAR", "ACTUALIZAR", "ESTABLECER", "ENTERO", "CADENA", "FLOTANTE", "FECHA"
+                        };//reservadas
+        string[] sim = { ">", "<", "=", "!", "*", ",", ";", "." };// simbolos
         string f = "";
         int ln = 1;
         int cl = 1;
@@ -68,6 +70,7 @@ namespace proyecto1
                         else if (check_symbol(char.ToString(c)))
                         {
                             //is symbol
+                            principal.lst.in_token("Symbolo", char.ToString(c), ln, cl);
                         }
                         else
                         {
@@ -128,7 +131,7 @@ namespace proyecto1
                             {
                                 principal.lst.in_token("Identificador", f, ln, cl);
                             }
-                            
+
                             f = "";
                             e = 0;
                             f = "";
