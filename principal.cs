@@ -10,9 +10,11 @@ using System.Windows.Forms;
 
 namespace proyecto1
 {
-    public partial class Form1 : Form
+    public partial class principal : Form
     {
-        public Form1()
+        public static listas lst = new listas();
+
+        public principal()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace proyecto1
 {
-    partial class Form1
+    partial class principal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
