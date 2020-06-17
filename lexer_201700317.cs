@@ -186,27 +186,13 @@ namespace proyecto1
         bool check_reserved(string word)
         {
 
-            if (res.Contains(word))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return res.Contains(word.ToUpper());
 
         }
         bool check_symbol(string word)
         {
 
-            if (sim.Contains(word))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return sim.Contains(word);
 
         }
 
