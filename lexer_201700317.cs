@@ -181,6 +181,7 @@ namespace proyecto1
                 }
             }
 
+            principal.lst.in_token("EOF", "EOF", -1, -1);
         }
 
         bool check_reserved(string word)
