@@ -251,11 +251,91 @@ namespace proyecto1
             else if (is_same("actualizar"))
             {
                 next_t();
+                //ID ESTABLECER (LIST) DONDE LOGIC_EXP? ;
+
+                if (s && is_type("identificador"))
+                {
+                    //node name
+                    nodos.AddLast("e" + n.ToString() + "[label=\"ACTUALIZAR TABLA - " + ret_curr()[2] + " \"];\n");
+                    rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+
+                if (s && is_same("establecer"))
+                {
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+                if (s && is_same("("))
+                {
+                    nodos.AddLast("e" + n.ToString() + "[label=\"SETERS \"];\n");
+                    rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+
+                    next_t();
+                    //run the list of seters
+                    lst_seters();
+                }
+                else
+                {
+                    s = false;
+                }
+
+                if (s && is_same(")"))
+                {
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+
+
+                if (s && is_same("donde"))
+                {
+                    //create node logic cond
+                    nodos.AddLast("e" + n.ToString() + "[label=\"CONDICIONAL \"];\n");
+                    rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+
+                    next_t();
+                    logic_expr_del();
+
+                }//if not contains donde we expect ';'
+
+
+                if (s && is_same(";"))
+                {
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+                if (!is_same("EOF"))
+                {
+                    main_x();
+                }
+                s = true;
+
             }
             else if (is_same("seleccionar"))
             {
                 next_t();
                 //* DE VAL_ARR DONDE LOGIC_XPR||JOIN_EXPR;
+
             }
             else
             {
@@ -264,6 +344,56 @@ namespace proyecto1
             }
 
         }
+
+        void lst_seters()
+        {
+            //ID = VALUE 
+            if (is_type("identificador"))
+            {
+                next_t();
+                t1 = ret_curr()[2];
+            }
+            else
+            {
+                s = false;
+            }
+
+            if (s && is_same("="))
+            {
+                next_t();
+            }
+            else
+            {
+                s = false;
+            }
+
+            if (s && is_content_var())
+            {
+                nodos.AddLast("e" + n.ToString() + "[label=\" " + t1 + " -> " + ret_curr()[2] + " \"];\n");
+                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                n++;
+                next_t();
+                ex_lst();
+            }
+            else
+            {
+                s = false;
+            }
+        }
+
+        void ex_lst()
+        {
+            if (is_same(","))
+            {
+                next_t();
+                lst_seters();
+            }
+            else
+            {
+                //return to regular
+            }
+        }
+
 
         void logic_expr_del()
         {
@@ -281,7 +411,8 @@ namespace proyecto1
 
             if (s && is_comp())
             {
-                next_t();
+                //next_t();
+                //dont need next
             }
             else
             {
@@ -292,7 +423,7 @@ namespace proyecto1
             {
                 nodos.AddLast("e" + n.ToString() + "[label=\" " + t2 + " " + t1 + " " + ret_curr()[2] + " \"];\n");
                 //rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
-                n++;
+                p2 = n;
 
                 next_t();
                 ex_logic();
@@ -309,15 +440,29 @@ namespace proyecto1
             // Y | O | EMPTY
             if (is_same("y"))
             {
-
+                nodos.AddLast("e" + n.ToString() + "[label=\" Y \"];\n");
+                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                p1 = n;
+                n++;
+                next_t();
+                logic_expr_del();
             }
             else if (is_same("o"))
             {
-
+                nodos.AddLast("e" + n.ToString() + "[label=\" Y \"];\n");
+                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                p1 = n;
+                n++;
+                next_t();
+                logic_expr_del();
             }
             else
             {
-
+                //end of derivation
+                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                n++;
             }
         }
 
