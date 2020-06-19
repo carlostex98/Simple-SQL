@@ -335,6 +335,14 @@ namespace proyecto1
             {
                 next_t();
                 //* DE VAL_ARR DONDE LOGIC_XPR||JOIN_EXPR;
+                if (is_same("*"))
+                {
+                    //this include all the table headers
+                }
+                else
+                {
+                    lst_camp_table();
+                }
 
             }
             else
@@ -343,6 +351,71 @@ namespace proyecto1
                 //PANIC MODE
             }
 
+        }
+
+        void lst_camp_table()
+        {
+            if (is_type("identificador"))
+            {
+                next_t();
+                if (is_same("donde"))
+                {
+                    next_t();
+                    //we look for id
+                    if (is_type("identificador"))
+                    {
+                        next_t();
+                        nxt_tab();
+                    }
+                    else
+                    {
+                        s = false;
+                    }
+                }
+                else
+                {
+                    //without alias
+                    nxt_tab();
+                }
+            }else if (is_type("identificador 2"))
+            {
+                next_t();
+                if (is_same("donde"))
+                {
+                    if (is_type("identificador"))
+                    {
+                        next_t();
+                        nxt_tab();
+                    }
+                    else
+                    {
+                        s = false;
+                    }
+                }
+                else
+                {
+                    //without alias
+                    nxt_tab();
+                }
+            }
+            else
+            {
+                s = false;
+                //error
+            }
+        }
+
+        void nxt_tab()
+        {
+            if (is_same(","))
+            {
+                nxt_tab();
+                lst_camp_table();
+            }
+            else
+            {
+                //return to home
+            }
         }
 
         void lst_seters()

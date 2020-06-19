@@ -120,6 +120,12 @@ namespace proyecto1
                             //id
                             f += c;
                         }
+                        else if (c == '.')
+                        {
+                            //special id
+                            f += c;
+                            e = 21;
+                        }
                         else
                         {
                             //end state
@@ -176,6 +182,20 @@ namespace proyecto1
                             principal.lst.in_token("Decimal", f, ln, cl);
                             f = "";
                             i--;
+                        }
+                        break;
+                    case 21:
+                        if (char.IsLetterOrDigit(c) || c == '_')
+                        {
+                            //id
+                            f += c;
+                        }
+                        else
+                        {
+
+                            principal.lst.in_token("Identificador 2", f, ln, cl);
+                            e = 0;
+                            f = "";
                         }
                         break;
                 }
