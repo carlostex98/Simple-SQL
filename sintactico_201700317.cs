@@ -8,11 +8,12 @@ namespace proyecto1
         LinkedList<string> nodos = new LinkedList<string>();
         LinkedList<string> rels = new LinkedList<string>();
         string[] resv = { "ENTERO", "CADENA", "FLOTANTE", "FECHA" };
+        string[] var_cont = { "IDENTIFICADOR", "FECHA", "ENTERO", "DECIMAL", "CADENA" };
         string t1 = "";
         string t2 = "";
         string t3 = "";
 
-        int p1 = 0;
+        int p1 = 0; //nodos padre numero
         int p2 = 0;
         int p3 = 0;
 
@@ -136,6 +137,15 @@ namespace proyecto1
                     s = false;
                 }
 
+                if (s && is_same("valores"))
+                {
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+
                 if (s && is_same("("))
                 {
                     next_t();
@@ -145,6 +155,16 @@ namespace proyecto1
                     s = false;
                 }
                 //ID type_var
+                //new node valores
+                if (s)
+                {
+                    nodos.AddLast("e" + n.ToString() + "[label=\"VALORES TABLA \"];\n");
+                    rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+                }
+
+
                 insert_vars();
 
                 if (s && is_same(")"))
@@ -176,6 +196,58 @@ namespace proyecto1
             {
                 next_t();
                 //DE ID DONDE LOGIC_EXPR --rr;
+                if (is_same("de"))
+                {
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+                if (s && is_type("identificador"))
+                {
+                    //node name
+                    nodos.AddLast("e" + n.ToString() + "[label=\"ELIMINAR EN TABLA - " + ret_curr()[2] + " \"];\n");
+                    rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+
+                if (s && is_same("donde"))
+                {
+                    //create node logic cond
+                    nodos.AddLast("e" + n.ToString() + "[label=\"CONDICIONAL \"];\n");
+                    rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+
+                    next_t();
+
+
+                }//if not contains donde we expect ';'
+                
+                //log expr
+
+                if (s && is_same(";"))
+                {
+                    next_t();
+                }
+                else
+                {
+                    s = false;
+                }
+                if (!is_same("EOF"))
+                {
+                    main_x();
+                }
+                s = true;
+
             }
             else if (is_same("actualizar"))
             {
@@ -191,6 +263,11 @@ namespace proyecto1
                 //error
                 //PANIC MODE
             }
+
+        }
+
+        void logic_expr()
+        {
 
         }
 
@@ -240,7 +317,20 @@ namespace proyecto1
 
         void insert_vars()
         {
-            
+
+            if (s && is_content_var())
+            {
+                nodos.AddLast("e" + n.ToString() + "[label=\" " + ret_curr()[2] + " \"];\n");
+                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                n++;
+
+                next_t();
+                v4();
+            }
+            else
+            {
+                s = false;
+            }
         }
 
         void v4()
@@ -283,6 +373,11 @@ namespace proyecto1
         bool is_var_type()
         {
             return resv.Contains(ret_curr()[2].ToUpper());
+        }
+
+        bool is_content_var()
+        {
+            return var_cont.Contains(ret_curr()[2].ToUpper());
         }
 
 
