@@ -228,11 +228,10 @@ namespace proyecto1
                     n++;
 
                     next_t();
-
+                    logic_expr_del();
 
                 }//if not contains donde we expect ';'
-                
-                //log expr
+
 
                 if (s && is_same(";"))
                 {
@@ -256,7 +255,7 @@ namespace proyecto1
             else if (is_same("seleccionar"))
             {
                 next_t();
-                //* DE VAL_ARR DONDE LOGIC_XPR;
+                //* DE VAL_ARR DONDE LOGIC_XPR||JOIN_EXPR;
             }
             else
             {
@@ -266,10 +265,62 @@ namespace proyecto1
 
         }
 
-        void logic_expr()
+        void logic_expr_del()
         {
+            //ID SYM_COM VAR_VALUE (Y || 0   THIS);
+            if (s && is_type("identificador"))
+            {
+                next_t();
+                t2 = ret_curr()[2];
+
+            }
+            else
+            {
+                s = false;
+            }
+
+            if (s && is_comp())
+            {
+                next_t();
+            }
+            else
+            {
+                s = false;
+            }
+            //var value
+            if (s && is_content_var())
+            {
+                nodos.AddLast("e" + n.ToString() + "[label=\" " + t2 + " " + t1 + " " + ret_curr()[2] + " \"];\n");
+                //rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                n++;
+
+                next_t();
+                ex_logic();
+            }
+            else
+            {
+                s = false;
+            }
 
         }
+
+        void ex_logic()
+        {
+            // Y | O | EMPTY
+            if (is_same("y"))
+            {
+
+            }
+            else if (is_same("o"))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
 
         void tab_vars()
         {
@@ -380,6 +431,73 @@ namespace proyecto1
             return var_cont.Contains(ret_curr()[2].ToUpper());
         }
 
+        bool is_comp()
+        {
+            bool nd = false;
+            if (is_same(">"))
+            {
+                nd = true;
+                //we espect = or empty
+                t1 = ">";
+                next_t();
+                if (is_same("="))
+                {
+                    t1 = ">=";
+                    next_t();
+                }
+                else
+                {
+                    //not
+                }
+            }
+            else if (is_same("<"))
+            {
+                nd = true;
+                t1 = "<";
+                next_t();
+                if (is_same("="))
+                {
+                    t1 = "<=";
+                    next_t();
+                }
+                else
+                {
+                    //not
+                }
+            }
+            else if (is_same("="))
+            {
+                next_t();
+                if (is_same("="))
+                {
+                    t1 = "==";
+                    nd = true;
+                    next_t();
+                }
+                else
+                {
+                    //not
+                    //error
+                }
+            }
+            else if (is_same("!"))
+            {
+                next_t();
+                if (is_same("="))
+                {
+                    t1 = "!=";
+                    nd = true;
+                    next_t();
+                }
+                else
+                {
+                    //not
+                    //error
+                }
+            }
+
+            return nd;
+        }
 
     }
 }
