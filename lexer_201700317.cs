@@ -2,7 +2,7 @@
 
 namespace proyecto1
 {
-    class lexer_201700317
+    public class lexer_201700317
     {
         string[] res = {"CREAR", "TABLA", "INSERTAR", "EN", "VALORES", "SELECCIONAR", "COMO", "DE", "DONDE",
                         "Y", "O", "ELIMINAR", "ACTUALIZAR", "ESTABLECER", "ENTERO", "CADENA", "FLOTANTE", "FECHA"

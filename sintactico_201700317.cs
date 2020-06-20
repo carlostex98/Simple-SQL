@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace proyecto1
 {
-    class sintactico_201700317
+    public class sintactico_201700317
     {
         LinkedList<string> nodos = new LinkedList<string>();
         LinkedList<string> rels = new LinkedList<string>();
