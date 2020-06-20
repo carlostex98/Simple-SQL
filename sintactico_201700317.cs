@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace proyecto1
 {
@@ -8,7 +11,7 @@ namespace proyecto1
         LinkedList<string> nodos = new LinkedList<string>();
         LinkedList<string> rels = new LinkedList<string>();
         string[] resv = { "ENTERO", "CADENA", "FLOTANTE", "FECHA" };
-        string[] var_cont = { "IDENTIFICADOR", "FECHA", "ENTERO", "DECIMAL", "CADENA" };
+        string[] var_cont = { "IDENTIFICADOR", "FECHA", "ENTERO", "DECIMAL", "CADENA", "IDENTIFICADOR 2" };
         string t1 = "";
         string t2 = "";
         string t3 = "";
@@ -57,6 +60,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_type("identificador"))
@@ -80,6 +84,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 //ID type_var
                 tab_vars();
@@ -91,6 +96,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same(";"))
@@ -100,6 +106,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 s = true;
@@ -121,6 +128,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_type("identificador"))
@@ -135,6 +143,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same("valores"))
@@ -144,6 +153,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same("("))
@@ -153,6 +163,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 //ID type_var
                 //new node valores
@@ -174,6 +185,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same(";"))
@@ -183,6 +195,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 s = true;
@@ -203,6 +216,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 if (s && is_type("identificador"))
                 {
@@ -216,6 +230,7 @@ namespace proyecto1
                 }
                 else
                 {
+                    error_panic();
                     s = false;
                 }
 
@@ -240,13 +255,14 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 s = true;
                 if (!is_same("EOF"))
                 {
                     main_x();
                 }
-                
+
 
             }
             else if (is_same("actualizar"))
@@ -267,6 +283,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same("establecer"))
@@ -276,6 +293,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 if (s && is_same("("))
                 {
@@ -291,6 +309,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same(")"))
@@ -300,6 +319,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
 
@@ -324,13 +344,14 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 s = true;
                 if (!is_same("EOF"))
                 {
                     main_x();
                 }
-                
+
 
             }
             else if (is_same("seleccionar"))
@@ -373,6 +394,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
 
                 if (s && is_same("donde"))
@@ -394,6 +416,7 @@ namespace proyecto1
                 else
                 {
                     s = false;
+                    error_panic();
                 }
                 s = true;
                 if (!is_same("EOF"))
@@ -407,7 +430,7 @@ namespace proyecto1
             {
                 //error
                 //PANIC MODE
-                
+                error_panic();
             }
 
         }
@@ -423,6 +446,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
         }
 
@@ -461,6 +485,7 @@ namespace proyecto1
                     else
                     {
                         s = false;
+                        error_panic();
                     }
                 }
                 else
@@ -504,6 +529,7 @@ namespace proyecto1
             {
                 s = false;
                 //error
+                error_panic();
             }
         }
 
@@ -531,6 +557,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
 
             if (s && is_same("="))
@@ -540,6 +567,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
 
             if (s && is_content_var())
@@ -552,7 +580,9 @@ namespace proyecto1
             }
             else
             {
+                Console.WriteLine("y");
                 s = false;
+                error_panic();
             }
         }
 
@@ -581,6 +611,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
 
             if (s && is_comp())
@@ -591,6 +622,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
             //var value
             if (s && is_content_var())
@@ -605,6 +637,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
 
         }
@@ -652,6 +685,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
 
             if (s && is_var_type())
@@ -666,6 +700,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
         }
 
@@ -699,6 +734,7 @@ namespace proyecto1
             else
             {
                 s = false;
+                error_panic();
             }
         }
 
@@ -727,7 +763,7 @@ namespace proyecto1
         void next_t()
         {
             x++;
-            if (x==principal.lst.tokens.Count)
+            if (x == principal.lst.tokens.Count)
             {
                 x--;
             }
@@ -750,7 +786,7 @@ namespace proyecto1
 
         bool is_content_var()
         {
-            return var_cont.Contains(ret_curr()[2].ToUpper());
+            return var_cont.Contains(ret_curr()[1].ToUpper());
         }
 
         bool is_comp()
@@ -816,14 +852,51 @@ namespace proyecto1
         {
             //manage
             //run until ';' or 'EOF'
-
-            while (!ret_curr()[2].Equals(";") || !ret_curr()[2].Equals("EOF"))
+            Console.WriteLine(ret_curr()[2]);
+            while (!ret_curr()[2].Equals(";"))
             {
                 next_t();
+                Console.WriteLine("siu");
+                if (ret_curr()[2].Equals("EOF"))
+                {
+                    break;
+                }
+                
             }
             //if ok -> ; or EOF
             next_t();
 
+        }
+
+        public void ast()
+        {
+            Encoding ascii = Encoding.ASCII;
+            StreamWriter bw;
+            String file_name = "";
+            try
+            {
+                bw = new StreamWriter(new FileStream(file_name, FileMode.Create), ascii);
+                bw.WriteLine("digraph D {");
+                bw.WriteLine("node [shape=box];");
+                bw.WriteLine("ex0 [label=\" MAIN PROGRAM \"];");
+                for (int i = 0; i < nodos.Count; i++)
+                {
+                    bw.WriteLine(nodos.ElementAt(i));
+                }
+                for (int i = 0; i < rels.Count; i++)
+                {
+                    bw.WriteLine(rels.ElementAt(i));
+                }
+                bw.WriteLine("}");
+
+
+            }
+            catch (IOException e2)
+            {
+                Console.WriteLine(e2.Message + "\n error.");
+                return;
+            }
+            bw.Close();
         }
 
     }

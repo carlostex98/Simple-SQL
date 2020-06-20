@@ -90,7 +90,7 @@ namespace proyecto1
             lexer.analizador(text_input+" ");
             //await
             lst.print_lst();
-            //sint.start_x();
+            sint.start_x();
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
