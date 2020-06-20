@@ -34,5 +34,11 @@ namespace proyecto1
         {
             colorear();
         }
+
+        private void cargarTablasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //shit here we go again
+            //here we load the table data
+        }
     }
 }

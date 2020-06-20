@@ -241,11 +241,12 @@ namespace proyecto1
                 {
                     s = false;
                 }
+                s = true;
                 if (!is_same("EOF"))
                 {
                     main_x();
                 }
-                s = true;
+                
 
             }
             else if (is_same("actualizar"))
@@ -324,46 +325,136 @@ namespace proyecto1
                 {
                     s = false;
                 }
+                s = true;
                 if (!is_same("EOF"))
                 {
                     main_x();
                 }
-                s = true;
+                
 
             }
             else if (is_same("seleccionar"))
             {
                 next_t();
+                nodos.AddLast("e" + n.ToString() + "[label=\"SELECCIONAR \"];\n");
+                rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
+                p1 = n;
+                n++;
                 //* DE VAL_ARR DONDE LOGIC_XPR||JOIN_EXPR;
+                nodos.AddLast("e" + n.ToString() + "[label=\"COLUMNAS\"];\n");
+                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                p2 = n;
+                n++;
                 if (is_same("*"))
                 {
                     //this include all the table headers
+                    nodos.AddLast("e" + n.ToString() + "[label=\"*\"];\n");
+                    rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                    n++;
+                    next_t();
                 }
                 else
                 {
                     lst_camp_table();
                 }
 
+                if (s && is_same("de"))
+                {
+                    //this include all the table headers
+                    nodos.AddLast("e" + n.ToString() + "[label=\"TABLAS\"];\n");
+                    rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                    p2 = n;
+                    n++;
+
+                    next_t();
+                    //call table array
+                    table_array();
+                }
+                else
+                {
+                    s = false;
+                }
+
+                if (s && is_same("donde"))
+                {
+                    nodos.AddLast("e" + n.ToString() + "[label=\"CONDICIONAL \"];\n");
+                    rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                    p1 = n;
+                    n++;
+
+                    next_t();
+                    logic_expr_del();
+                }//without else
+
+                if (is_same(";"))
+                {
+                    //end of line
+
+                }
+                else
+                {
+                    s = false;
+                }
+                s = true;
+                if (!is_same("EOF"))
+                {
+                    main_x();
+                }
+
+
             }
             else
             {
                 //error
                 //PANIC MODE
+                
             }
 
         }
+
+        void table_array()
+        {
+            //ID, ID, ID, ID....
+            if (is_type("identificador"))
+            {
+                next_t();
+                coma_table();
+            }
+            else
+            {
+                s = false;
+            }
+        }
+
+        void coma_table()
+        {
+            if (is_same(","))
+            {
+                next_t();
+                table_array();
+            }
+            else
+            {
+                //return to home
+            }
+        }
+
 
         void lst_camp_table()
         {
             if (is_type("identificador"))
             {
+                t1 = ret_curr()[2];
                 next_t();
-                if (is_same("donde"))
+                if (is_same("como"))
                 {
                     next_t();
                     //we look for id
                     if (is_type("identificador"))
                     {
+                        nodos.AddLast("e" + n.ToString() + "[label=\" " + t1 + "->" + ret_curr()[2] + " \"];\n");
+                        rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                        n++;
                         next_t();
                         nxt_tab();
                     }
@@ -375,15 +466,23 @@ namespace proyecto1
                 else
                 {
                     //without alias
+                    nodos.AddLast("e" + n.ToString() + "[label=\" " + t1 + " \"];\n");
+                    rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                    n++;
                     nxt_tab();
                 }
-            }else if (is_type("identificador 2"))
+            }
+            else if (is_type("identificador 2"))
             {
+                t1 = ret_curr()[2];
                 next_t();
-                if (is_same("donde"))
+                if (is_same("como"))
                 {
                     if (is_type("identificador"))
                     {
+                        nodos.AddLast("e" + n.ToString() + "[label=\" " + t1 + "->" + ret_curr()[2] + " \"];\n");
+                        rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                        n++;
                         next_t();
                         nxt_tab();
                     }
@@ -395,6 +494,9 @@ namespace proyecto1
                 else
                 {
                     //without alias
+                    nodos.AddLast("e" + n.ToString() + "[label=\" " + ret_curr()[2] + " \"];\n");
+                    rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                    n++;
                     nxt_tab();
                 }
             }
@@ -467,7 +569,6 @@ namespace proyecto1
             }
         }
 
-
         void logic_expr_del()
         {
             //ID SYM_COM VAR_VALUE (Y || 0   THIS);
@@ -538,7 +639,6 @@ namespace proyecto1
                 n++;
             }
         }
-
 
         void tab_vars()
         {
@@ -627,6 +727,10 @@ namespace proyecto1
         void next_t()
         {
             x++;
+            if (x==principal.lst.tokens.Count)
+            {
+                x--;
+            }
         }
 
         bool is_same(string z)
@@ -686,17 +790,8 @@ namespace proyecto1
             else if (is_same("="))
             {
                 next_t();
-                if (is_same("="))
-                {
-                    t1 = "==";
-                    nd = true;
-                    next_t();
-                }
-                else
-                {
-                    //not
-                    //error
-                }
+                t1 = "=";
+                nd = true;
             }
             else if (is_same("!"))
             {
