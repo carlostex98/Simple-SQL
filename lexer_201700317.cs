@@ -7,7 +7,7 @@ namespace proyecto1
         string[] res = {"CREAR", "TABLA", "INSERTAR", "EN", "VALORES", "SELECCIONAR", "COMO", "DE", "DONDE",
                         "Y", "O", "ELIMINAR", "ACTUALIZAR", "ESTABLECER", "ENTERO", "CADENA", "FLOTANTE", "FECHA"
                         };//reservadas
-        string[] sim = { ">", "<", "=", "!", "*", ",", ";", "." };// simbolos
+        string[] sim = { ">", "<", "=", "!", "*", ",", ";", ".", "(", ")" };// simbolos
         string f = "";
         int ln = 1;
         int cl = 1;
@@ -44,16 +44,19 @@ namespace proyecto1
                         {
                             //number digit or float
                             e = 3;
+                            f += c;
                         }
                         else if (char.IsLetter(c) || c == '_')
                         {
                             //id
                             e = 4;
+                            f += c;
                         }
                         else if (c == '\"')
                         {
                             //string
                             e = 5;
+
                         }
                         else if (c == '\'')
                         {
@@ -140,7 +143,7 @@ namespace proyecto1
 
                             f = "";
                             e = 0;
-                            f = "";
+                            i--;
                         }
                         break;
                     case 5:
@@ -196,6 +199,7 @@ namespace proyecto1
                             principal.lst.in_token("Identificador 2", f, ln, cl);
                             e = 0;
                             f = "";
+                            i--;
                         }
                         break;
                 }

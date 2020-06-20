@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace proyecto1
 {
@@ -24,5 +26,20 @@ namespace proyecto1
             tokens.Clear();
             errores.Clear();
         }
+
+        public void print_lst()
+        {
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                Console.WriteLine(tokens.ElementAt(i)[2]);
+            }
+            Console.WriteLine("-------------------------------------");
+            for (int i = 0; i < errores.Count; i++)
+            {
+                Console.WriteLine(errores.ElementAt(i)[2]);
+            }
+        }
+
+
     }
 }

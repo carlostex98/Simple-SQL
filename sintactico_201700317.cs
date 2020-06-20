@@ -812,5 +812,19 @@ namespace proyecto1
             return nd;
         }
 
+        void error_panic()
+        {
+            //manage
+            //run until ';' or 'EOF'
+
+            while (!ret_curr()[2].Equals(";") || !ret_curr()[2].Equals("EOF"))
+            {
+                next_t();
+            }
+            //if ok -> ; or EOF
+            next_t();
+
+        }
+
     }
 }

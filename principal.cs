@@ -29,6 +29,7 @@ namespace proyecto1
         {
             //link to the other class
             logChanges.Text = "s";
+            parse_to_end(editor.Text);
 
         }
 
@@ -88,7 +89,8 @@ namespace proyecto1
             lst.limpia_todo();
             lexer.analizador(text_input+" ");
             //await
-            sint.start_x();
+            lst.print_lst();
+            //sint.start_x();
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
