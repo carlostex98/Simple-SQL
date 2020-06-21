@@ -91,6 +91,7 @@ namespace proyecto1
             //await
             lst.print_lst();
             sint.start_x();
+            lst.render_tokens();
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
