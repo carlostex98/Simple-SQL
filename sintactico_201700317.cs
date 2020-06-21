@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,7 @@ namespace proyecto1
             {
                 main_x();
             }
-
+            ast();
 
         }
 
@@ -276,6 +277,7 @@ namespace proyecto1
                     nodos.AddLast("e" + n.ToString() + "[label=\"ACTUALIZAR TABLA - " + ret_curr()[2] + " \"];\n");
                     rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
                     p1 = n;
+                    p2 = p1;
                     n++;
 
                     next_t();
@@ -326,6 +328,7 @@ namespace proyecto1
                 if (s && is_same("donde"))
                 {
                     //create node logic cond
+                    p1 = p2;
                     nodos.AddLast("e" + n.ToString() + "[label=\"CONDICIONAL \"];\n");
                     rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                     p1 = n;
@@ -387,6 +390,7 @@ namespace proyecto1
                     p2 = n;
                     n++;
 
+
                     next_t();
                     //call table array
                     table_array();
@@ -440,6 +444,9 @@ namespace proyecto1
             //ID, ID, ID, ID....
             if (is_type("identificador"))
             {
+                nodos.AddLast("e" + n.ToString() + "[label=\" " + ret_curr()[2] + " \"];\n");
+                rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                n++;
                 next_t();
                 coma_table();
             }
@@ -551,8 +558,9 @@ namespace proyecto1
             //ID = VALUE 
             if (is_type("identificador"))
             {
-                next_t();
                 t1 = ret_curr()[2];
+                next_t();
+
             }
             else
             {
@@ -604,9 +612,8 @@ namespace proyecto1
             //ID SYM_COM VAR_VALUE (Y || 0   THIS);
             if (s && is_type("identificador"))
             {
-                next_t();
                 t2 = ret_curr()[2];
-
+                next_t();
             }
             else
             {
@@ -630,7 +637,7 @@ namespace proyecto1
                 nodos.AddLast("e" + n.ToString() + "[label=\" " + t2 + " " + t1 + " " + ret_curr()[2] + " \"];\n");
                 //rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                 p2 = n;
-
+                n++;
                 next_t();
                 ex_logic();
             }
@@ -649,7 +656,7 @@ namespace proyecto1
             {
                 nodos.AddLast("e" + n.ToString() + "[label=\" Y \"];\n");
                 rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
-                rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                rels.AddLast("e" + n.ToString() + " -> e" + p2.ToString() + "; \n");
                 p1 = n;
                 n++;
                 next_t();
@@ -659,7 +666,7 @@ namespace proyecto1
             {
                 nodos.AddLast("e" + n.ToString() + "[label=\" Y \"];\n");
                 rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
-                rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
+                rels.AddLast("e" + n.ToString() + " -> e" + p2.ToString() + "; \n");
                 p1 = n;
                 n++;
                 next_t();
@@ -668,8 +675,8 @@ namespace proyecto1
             else
             {
                 //end of derivation
-                rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
-                n++;
+                rels.AddLast("e" + p1.ToString() + " -> e" + p2.ToString() + "; \n");
+                
             }
         }
 
@@ -861,7 +868,7 @@ namespace proyecto1
                 {
                     break;
                 }
-                
+
             }
             //if ok -> ; or EOF
             next_t();
@@ -872,7 +879,7 @@ namespace proyecto1
         {
             Encoding ascii = Encoding.ASCII;
             StreamWriter bw;
-            String file_name = "";
+            String file_name = "ast.dot";
             try
             {
                 bw = new StreamWriter(new FileStream(file_name, FileMode.Create), ascii);
@@ -888,6 +895,21 @@ namespace proyecto1
                     bw.WriteLine(rels.ElementAt(i));
                 }
                 bw.WriteLine("}");
+
+
+                Process cmd = new Process();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.CreateNoWindow = true;
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.Start();
+
+                cmd.StandardInput.WriteLine("dot " + file_name + " -Tpng -o ast.png");
+                cmd.StandardInput.Flush();
+                cmd.StandardInput.Close();
+                cmd.WaitForExit();
+                Console.WriteLine(cmd.StandardOutput.ReadToEnd());
 
 
             }
