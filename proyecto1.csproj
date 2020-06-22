@@ -56,7 +56,9 @@
     <Compile Include="listas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="server_201700317.cs" />
     <Compile Include="sintactico_201700317.cs" />
+    <Compile Include="tabla.cs" />
     <EmbeddedResource Include="principal.resx">
       <DependentUpon>principal.cs</DependentUpon>
     </EmbeddedResource>

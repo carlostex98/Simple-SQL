@@ -16,6 +16,7 @@ namespace proyecto1
         public static listas lst = new listas();
         public static lexer_201700317 lexer = new lexer_201700317();
         public static sintactico_201700317 sint = new sintactico_201700317();
+        public static server_201700317 dbms = new server_201700317();
 
         private string file_name = "Default";
 

@@ -71,7 +71,9 @@ namespace proyecto1
                     rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
                     p1 = n;
                     n++;
+                    principal.dbms.new_table(ret_curr()[2]);
                     next_t();
+
                 }
                 else
                 {
@@ -676,7 +678,7 @@ namespace proyecto1
             {
                 //end of derivation
                 rels.AddLast("e" + p1.ToString() + " -> e" + p2.ToString() + "; \n");
-                
+
             }
         }
 
