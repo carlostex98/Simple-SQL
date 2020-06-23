@@ -11,6 +11,9 @@ namespace proyecto1
     {
         LinkedList<string> nodos = new LinkedList<string>();
         LinkedList<string> rels = new LinkedList<string>();
+
+        LinkedList<string> tmp1 = new LinkedList<string>();
+
         string[] resv = { "ENTERO", "CADENA", "FLOTANTE", "FECHA" };
         string[] var_cont = { "IDENTIFICADOR", "FECHA", "ENTERO", "DECIMAL", "CADENA", "IDENTIFICADOR 2" };
         string t1 = "";
@@ -137,6 +140,7 @@ namespace proyecto1
                 if (s && is_type("identificador"))
                 {
                     //get id
+                    t1 = ret_curr()[2];
                     nodos.AddLast("e" + n.ToString() + "[label=\"INSERTAR EN TABLA - " + ret_curr()[2] + " \"];\n");
                     rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
                     p1 = n;
@@ -690,6 +694,7 @@ namespace proyecto1
                 //get id
                 t1 = ret_curr()[2];
                 next_t();
+                principal.dbms.add_header_last(ret_curr()[2]);
             }
             else
             {
@@ -733,6 +738,7 @@ namespace proyecto1
 
             if (s && is_content_var())
             {
+                tmp1.AddLast(ret_curr()[2]);
                 nodos.AddLast("e" + n.ToString() + "[label=\" " + ret_curr()[2] + " \"];\n");
                 rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                 n++;
@@ -758,6 +764,13 @@ namespace proyecto1
             {
                 //stop
                 //this means the end of this part
+                string[] z = new string[tmp1.Count];
+                for (int i = 0; i < tmp1.Count; i++)
+                {
+                    z[i] = tmp1.ElementAt(i);
+                }
+                tmp1.Clear();
+                principal.dbms.insert_record(t1,z);
             }
         }
 

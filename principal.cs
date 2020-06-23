@@ -196,5 +196,10 @@ namespace proyecto1
         {
             this.Close();
         }
+
+        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Carlos Tenes \n201700317", "Compiladores 1");
+        }
     }
 }
