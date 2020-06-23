@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace proyecto1
 {
-    class tabla
+    public class tabla
     {
         public string nombre;
         public tabla sig;

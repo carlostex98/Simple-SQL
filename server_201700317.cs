@@ -573,5 +573,10 @@ namespace proyecto1
             return f;
         }
 
+        public tabla ret_first()
+        {
+            return primero;
+        }
+
     }
 }
