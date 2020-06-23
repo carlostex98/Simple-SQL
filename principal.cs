@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace proyecto1
@@ -17,7 +12,10 @@ namespace proyecto1
         public static lexer_201700317 lexer = new lexer_201700317();
         public static sintactico_201700317 sint = new sintactico_201700317();
         public static server_201700317 dbms = new server_201700317();
-
+        string[] res = {"CREAR", "TABLA", "INSERTAR", "EN", "VALORES", "SELECCIONAR", "COMO", "DE", "DONDE",
+                        "Y", "O", "ELIMINAR", "ACTUALIZAR", "ESTABLECER", "ENTERO", "CADENA", "FLOTANTE", "FECHA"
+                        };//reservadas
+        string[] sim = { ">", "<", "=", "!", "*", ",", ";", ".", "(", ")" };
         private string file_name = "Default";
 
         public principal()
@@ -30,7 +28,7 @@ namespace proyecto1
         {
             //link to the other class
             logChanges.Text = "s";
-            parse_to_end(editor.Text+" ");
+            parse_to_end(editor.Text + " ");
 
         }
 
@@ -88,7 +86,7 @@ namespace proyecto1
         private void parse_to_end(String text_input)
         {
             lst.limpia_todo();
-            lexer.analizador(text_input+" ");
+            lexer.analizador(text_input + " ");
             //await
             lst.print_lst();
             sint.start_x();
@@ -150,7 +148,7 @@ namespace proyecto1
                         fileN.Text = file_name;
                         sw.WriteLine(editor.Text);
                     }
-                        
+
                 }
             }
             else
@@ -206,5 +204,6 @@ namespace proyecto1
         {
             parse_to_end(editor.SelectedText + " ");
         }
+
     }
 }

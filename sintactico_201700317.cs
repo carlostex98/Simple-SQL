@@ -267,7 +267,14 @@ namespace proyecto1
                 if (s && is_same(";"))
                 {
                     string[,] g = new string[tmp_log.Count, 4];
+                    for (int i = 0; i < tmp_log.Count; i++)
+                    {
+                        for (int j = 0; j < tmp_log.ElementAt(i).Length; j++)
+                        {
+                            g[i, j] = tmp_log.ElementAt(i)[j];
+                        }
 
+                    }
                     principal.dbms.delete_record(tab_name, g);
 
                     next_t();
@@ -326,6 +333,7 @@ namespace proyecto1
 
                     next_t();
                     //run the list of seters
+                    tmp_set.Clear();
                     lst_seters();
                 }
                 else
@@ -366,7 +374,24 @@ namespace proyecto1
                     string[,] g = new string[tmp_log.Count, 4];
                     string[,] g2 = new string[tmp_set.Count, 2];
 
-                    principal.dbms.delete_record(tab_name, g);
+                    for (int i = 0; i < tmp_log.Count; i++)
+                    {
+                        for (int j = 0; j < tmp_log.ElementAt(i).Length; j++)
+                        {
+                            g[i,j] = tmp_log.ElementAt(i)[j];
+                        }
+                        
+                    }
+                    for (int i = 0; i < tmp_set.Count; i++)
+                    {
+                        for (int j = 0; j < tmp_set.ElementAt(i).Length; j++)
+                        {
+                            g2[i, j] = tmp_set.ElementAt(i)[j];
+                        }
+
+                    }
+
+                    principal.dbms.update_record(tab_name,g, g2);
 
                     next_t();
                 }

@@ -59,6 +59,7 @@
     <Compile Include="server_201700317.cs" />
     <Compile Include="sintactico_201700317.cs" />
     <Compile Include="tabla.cs" />
+    <Compile Include="table_render.cs" />
     <EmbeddedResource Include="principal.resx">
       <DependentUpon>principal.cs</DependentUpon>
     </EmbeddedResource>
