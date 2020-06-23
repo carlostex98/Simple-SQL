@@ -14,11 +14,17 @@ namespace proyecto1
 
         LinkedList<string> tmp1 = new LinkedList<string>();
 
+        LinkedList<string[]> tmp_log = new LinkedList<string[]>();
+        LinkedList<string[]> tmp_set = new LinkedList<string[]>();
+
+
         string[] resv = { "ENTERO", "CADENA", "FLOTANTE", "FECHA" };
         string[] var_cont = { "IDENTIFICADOR", "FECHA", "ENTERO", "DECIMAL", "CADENA", "IDENTIFICADOR 2" };
         string t1 = "";
         string t2 = "";
         string t3 = "";
+
+        string tab_name = "";
 
         int p1 = 0; //nodos padre numero
         int p2 = 0;
@@ -228,6 +234,7 @@ namespace proyecto1
                 if (s && is_type("identificador"))
                 {
                     //node name
+                    tab_name = ret_curr()[2];
                     nodos.AddLast("e" + n.ToString() + "[label=\"ELIMINAR EN TABLA - " + ret_curr()[2] + " \"];\n");
                     rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
                     p1 = n;
@@ -250,6 +257,8 @@ namespace proyecto1
                     n++;
 
                     next_t();
+                    t3 = "Y";
+                    tmp_log.Clear();
                     logic_expr_del();
 
                 }//if not contains donde we expect ';'
@@ -257,7 +266,12 @@ namespace proyecto1
 
                 if (s && is_same(";"))
                 {
+                    string[,] g = new string[tmp_log.Count, 4];
+
+                    principal.dbms.delete_record(tab_name, g);
+
                     next_t();
+
                 }
                 else
                 {
@@ -285,7 +299,7 @@ namespace proyecto1
                     p1 = n;
                     p2 = p1;
                     n++;
-
+                    tab_name = ret_curr()[2];
                     next_t();
                 }
                 else
@@ -339,7 +353,8 @@ namespace proyecto1
                     rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                     p1 = n;
                     n++;
-
+                    t3 = "Y";
+                    tmp_log.Clear();
                     next_t();
                     logic_expr_del();
 
@@ -348,6 +363,11 @@ namespace proyecto1
 
                 if (s && is_same(";"))
                 {
+                    string[,] g = new string[tmp_log.Count, 4];
+                    string[,] g2 = new string[tmp_set.Count, 2];
+
+                    principal.dbms.delete_record(tab_name, g);
+
                     next_t();
                 }
                 else
@@ -438,6 +458,7 @@ namespace proyecto1
             }
             else
             {
+
                 //error
                 //PANIC MODE
                 error_panic();
@@ -589,6 +610,8 @@ namespace proyecto1
                 nodos.AddLast("e" + n.ToString() + "[label=\" " + t1 + " -> " + ret_curr()[2] + " \"];\n");
                 rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                 n++;
+                string[] g = { t1, ret_curr()[2] };
+                tmp_set.AddLast(g);
                 next_t();
                 ex_lst();
             }
@@ -642,6 +665,8 @@ namespace proyecto1
             {
                 nodos.AddLast("e" + n.ToString() + "[label=\" " + t2 + " " + t1 + " " + ret_curr()[2] + " \"];\n");
                 //rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
+                string[] s = { t2, t1, ret_curr()[2], t3 };
+                tmp_log.AddLast(s);
                 p2 = n;
                 n++;
                 next_t();
@@ -665,6 +690,7 @@ namespace proyecto1
                 rels.AddLast("e" + n.ToString() + " -> e" + p2.ToString() + "; \n");
                 p1 = n;
                 n++;
+                t3 = "Y";
                 next_t();
                 logic_expr_del();
             }
@@ -674,6 +700,7 @@ namespace proyecto1
                 rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                 rels.AddLast("e" + n.ToString() + " -> e" + p2.ToString() + "; \n");
                 p1 = n;
+                t3 = "O";
                 n++;
                 next_t();
                 logic_expr_del();
@@ -770,7 +797,7 @@ namespace proyecto1
                     z[i] = tmp1.ElementAt(i);
                 }
                 tmp1.Clear();
-                principal.dbms.insert_record(t1,z);
+                principal.dbms.insert_record(t1, z);
             }
         }
 

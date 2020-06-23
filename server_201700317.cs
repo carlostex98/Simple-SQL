@@ -54,7 +54,7 @@ namespace proyecto1
         }
 
 
-        public void update_record(string tabla, string[][] conditions, string[][] setter)
+        public void update_record(string tabla, string[,] conditions, string[,] setter)
         {
             tabla vista = primero;
             while (vista != null)
@@ -75,11 +75,11 @@ namespace proyecto1
                                 //do replace
                                 for (int k = 0; k < setter.Length; k++)
                                 {
-                                    s[return_index_col(vista, setter[k][0], i)] = setter[k][1];
+                                    s[return_index_col(vista, setter[k,0], i)] = setter[k,1];
                                 }
-                                
+
                             }
-                            
+
                         }
                         tmp2.AddLast(s);
                     }
@@ -96,11 +96,11 @@ namespace proyecto1
         }
 
 
-        public void delete_record(string tabla, string[][] conditions)
+        public void delete_record(string tabla, string[,] conditions)
         {
             tmp.Clear();
             tmp2.Clear();
-            
+
             //with the selected ones
             tabla vista = primero;
             while (vista != null)
@@ -112,7 +112,7 @@ namespace proyecto1
                     {
                         for (int j = 0; j < tmp.Count; j++)
                         {
-                            if (i!=tmp.ElementAt(j))
+                            if (i != tmp.ElementAt(j))
                             {
                                 //do something
                                 tmp2.AddLast(vista.content.ElementAt(i));
@@ -133,7 +133,7 @@ namespace proyecto1
 
 
 
-        private void logic_filter(string tabla, string[][] conditions)
+        private void logic_filter(string tabla, string[,] conditions)
         {
             bool t = true;
             bool f = false;
@@ -152,17 +152,17 @@ namespace proyecto1
                     {
                         for (int j = 0; j < conditions.Length; j++)
                         {
-                            switch (conditions[j][1])
+                            switch (conditions[j, 1])
                             {
                                 case ">":
                                     //numeric or date
-                                    if (num_val(remove_date(conditions[j][2])))//reported
+                                    if (num_val(remove_date(conditions[j, 2])))//reported
                                     {
-                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j][0], i))))//requested
+                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j, 0], i))))//requested
                                         {
-                                            if (double.Parse(ret_val_tab(vista, conditions[j][0], i)) > double.Parse(remove_date(conditions[j][2])))
+                                            if (double.Parse(ret_val_tab(vista, conditions[j, 0], i)) > double.Parse(remove_date(conditions[j, 2])))
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && true;
                                                 }
@@ -173,7 +173,7 @@ namespace proyecto1
                                             }
                                             else
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && false;
                                                 }
@@ -195,13 +195,13 @@ namespace proyecto1
                                     break;
                                 case "<":
                                     //numeric or date
-                                    if (num_val(remove_date(conditions[j][2])))//reported
+                                    if (num_val(remove_date(conditions[j, 2])))//reported
                                     {
-                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j][0], i))))//requested
+                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j, 0], i))))//requested
                                         {
-                                            if (double.Parse(ret_val_tab(vista, conditions[j][0], i)) < double.Parse(remove_date(conditions[j][2])))
+                                            if (double.Parse(ret_val_tab(vista, conditions[j, 0], i)) < double.Parse(remove_date(conditions[j, 2])))
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && true;
                                                 }
@@ -212,7 +212,7 @@ namespace proyecto1
                                             }
                                             else
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && false;
                                                 }
@@ -233,13 +233,13 @@ namespace proyecto1
                                     break;
                                 case ">=":
                                     //numeric or date
-                                    if (num_val(remove_date(conditions[j][2])))//reported
+                                    if (num_val(remove_date(conditions[j,2])))//reported
                                     {
-                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j][0], i))))//requested
+                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j,0], i))))//requested
                                         {
-                                            if (double.Parse(ret_val_tab(vista, conditions[j][0], i)) >= double.Parse(remove_date(conditions[j][2])))
+                                            if (double.Parse(ret_val_tab(vista, conditions[j,0], i)) >= double.Parse(remove_date(conditions[j,2])))
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && true;
                                                 }
@@ -250,7 +250,7 @@ namespace proyecto1
                                             }
                                             else
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && false;
                                                 }
@@ -273,13 +273,13 @@ namespace proyecto1
                                     //numeric or date
 
                                     //is date
-                                    if (num_val(remove_date(conditions[j][2])))//reported
+                                    if (num_val(remove_date(conditions[j,2])))//reported
                                     {
-                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j][0], i))))//requested
+                                        if (num_val(remove_date(ret_val_tab(vista, conditions[j,0], i))))//requested
                                         {
-                                            if (double.Parse(ret_val_tab(vista, conditions[j][0], i)) <= double.Parse(remove_date(conditions[j][2])))
+                                            if (double.Parse(ret_val_tab(vista, conditions[j,0], i)) <= double.Parse(remove_date(conditions[j,2])))
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && true;
                                                 }
@@ -290,7 +290,7 @@ namespace proyecto1
                                             }
                                             else
                                             {
-                                                if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                                if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
                                                     t = t && false;
                                                 }
@@ -312,10 +312,10 @@ namespace proyecto1
                                     break;
                                 case "=":
                                     //string 
-                                    if (conditions[j][i].Equals(ret_val_tab(vista, conditions[j][0], i), StringComparison.InvariantCultureIgnoreCase))
+                                    if (conditions[j,i].Equals(ret_val_tab(vista, conditions[j,0], i), StringComparison.InvariantCultureIgnoreCase))
                                     {
                                         //means true
-                                        if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                        if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
                                             t = t && true;
                                         }
@@ -326,7 +326,7 @@ namespace proyecto1
                                     }
                                     else
                                     {
-                                        if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                        if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
                                             t = t && false;
                                         }
@@ -338,10 +338,10 @@ namespace proyecto1
                                     break;
                                 case "!=":
                                     //string 
-                                    if (!conditions[j][i].Equals(ret_val_tab(vista, conditions[j][0], i), StringComparison.InvariantCultureIgnoreCase))
+                                    if (!conditions[j,i].Equals(ret_val_tab(vista, conditions[j,0], i), StringComparison.InvariantCultureIgnoreCase))
                                     {
                                         //means true
-                                        if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                        if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
                                             t = t && true;
                                         }
@@ -352,7 +352,7 @@ namespace proyecto1
                                     }
                                     else
                                     {
-                                        if (conditions[j][3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                                        if (conditions[j,3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
                                             t = t && false;
                                         }
