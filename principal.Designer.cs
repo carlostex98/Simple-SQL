@@ -52,6 +52,7 @@
             this.logChanges = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.fileN = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -249,11 +250,22 @@
             this.fileN.TabIndex = 7;
             this.fileN.Text = "label3";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(591, 24);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(152, 28);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Compilar seleccion";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 547);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.fileN);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.logChanges);
@@ -297,6 +309,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label fileN;
         private System.Windows.Forms.ToolStripMenuItem verTablasToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
     }
 }
 

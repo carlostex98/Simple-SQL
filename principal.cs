@@ -30,7 +30,7 @@ namespace proyecto1
         {
             //link to the other class
             logChanges.Text = "s";
-            parse_to_end(editor.Text);
+            parse_to_end(editor.Text+" ");
 
         }
 
@@ -200,6 +200,11 @@ namespace proyecto1
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Carlos Tenes \n201700317", "Compiladores 1");
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            parse_to_end(editor.SelectedText + " ");
         }
     }
 }

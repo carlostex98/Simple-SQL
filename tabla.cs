@@ -11,6 +11,7 @@ namespace proyecto1
         public string nombre;
         public tabla sig;
         public LinkedList<string> headers = new LinkedList<string>();
+        public LinkedList<string> data_type = new LinkedList<string>();
         public LinkedList<string[]> content = new LinkedList<string[]>();
     }
 }

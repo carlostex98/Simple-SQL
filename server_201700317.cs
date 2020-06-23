@@ -329,7 +329,7 @@ namespace proyecto1
                             tmp.AddLast(i);
                         }
                     }
-
+                    break;
                 }
                 vista = vista.sig;
             }
