@@ -707,7 +707,7 @@ namespace proyecto1
                 nodos.AddLast("e" + n.ToString() + "[label=\" " + t1 + "- " + ret_curr()[2] + " \"];\n");
                 rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                 n++;
-
+                principal.dbms.add_header_type_var(ret_curr()[2]);
                 next_t();
                 v2();
             }

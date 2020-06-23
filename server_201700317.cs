@@ -33,6 +33,12 @@ namespace proyecto1
             ultimo.headers.AddLast(name);
         }
 
+        public void add_header_type_var(string name)
+        {
+            ultimo.data_type.AddLast(name);
+        }
+
+
         public void insert_record(string name, string[] values)
         {
             tabla vista = primero;
@@ -47,15 +53,55 @@ namespace proyecto1
             }
         }
 
+
+        public void update_record(string tabla, string[][] conditions, string[][] setter)
+        {
+            tabla vista = primero;
+            while (vista != null)
+            {
+                if (vista.nombre.Equals(tabla, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    logic_filter(tabla, conditions);
+                    for (int i = 0; i < vista.content.Count; i++)
+                    {
+                        string[] s = new string[vista.content.ElementAt(i).Length];
+                        s = vista.content.ElementAt(i);
+                        for (int j = 0; j < tmp.Count; j++)
+                        {
+                            if (i == tmp.ElementAt(j))
+                            {
+                                //do the update
+                                //new values
+                                //do replace
+                                for (int k = 0; k < setter.Length; k++)
+                                {
+                                    s[return_index_col(vista, setter[k][0], i)] = setter[k][1];
+                                }
+                                
+                            }
+                            
+                        }
+                        tmp2.AddLast(s);
+                    }
+                    vista.content.Clear();
+                    for (int i = 0; i < tmp2.Count; i++)
+                    {
+                        vista.content.AddLast(tmp2.ElementAt(i));
+                    }
+                    break;
+
+                }
+                vista = vista.sig;
+            }
+        }
+
+
         public void delete_record(string tabla, string[][] conditions)
         {
             tmp.Clear();
             tmp2.Clear();
             
             //with the selected ones
-
-
-
             tabla vista = primero;
             while (vista != null)
             {
@@ -83,11 +129,6 @@ namespace proyecto1
                 }
                 vista = vista.sig;
             }
-
-
-            
-
-
         }
 
 
@@ -347,6 +388,20 @@ namespace proyecto1
                 }
             }
 
+            return h;
+        }
+
+        int return_index_col(tabla tmp, string col_header, int index)
+        {
+            int h = 0;
+            for (int i = 0; i < tmp.headers.Count; i++)
+            {
+                if (tmp.headers.ElementAt(i).Equals(col_header, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    h = i;
+                    break;
+                }
+            }
             return h;
         }
 
