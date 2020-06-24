@@ -14,40 +14,36 @@ namespace proyecto1
             + "<html>\n"
             + "\n"
             + "<head>\n"
-            + "    <meta charset=\"utf-8\">\n"
-            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-            + "    <title>Hello Bulma!</title>\n"
-            + "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css\">\n"
+            + "    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n"
+            + "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n"
+            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n"
             + "</head>\n"
             + "\n"
             + "<body>\n"
-            + "    <nav class=\"navbar is-dark\" role=\"navigation\" aria-label=\"main navigation\">\n"
-            + "        <div class=\"navbar-brand\">\n"
-            + "            <a class=\"navbar-item\" href=\"https://bulma.io\">\n"
-            + "                <h2 class=\"is-white\">Compiladores</h2>\n"
-            + "            </a>\n"
-            + "            <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n"
-            + "                <span aria-hidden=\"true\"></span>\n"
-            + "                <span aria-hidden=\"true\"></span>\n"
-            + "                <span aria-hidden=\"true\"></span>\n"
-            + "            </a>\n"
+            + "    <nav>\n"
+            + "        <div class=\"nav-wrapper indigo darken-4\">\n"
+            + "            <a href=\"#\" class=\"brand-logo center\">Compiladores</a>\n"
             + "        </div>\n"
             + "    </nav>\n"
-            + "    <section class=\"is-full\">\n"
-            + "        <table class=\"table is-full\">\n"
-            + "            <thead>\n"
-            + "                <tr>\n"
-            + "                    <th><abbr>ID</abbr></th>\n" 
-            + "                    <th><abbr title=\"Played\">Nombre</abbr></th>\n"
-            + "                    <th><abbr title=\"Won\">Valor</abbr></th>\n"
-            + "                    <th><abbr title=\"Drawn\">Linea</abbr></th>\n"
-            + "                    <th><abbr title=\"Lost\">Columna</abbr></th>\n"
-            + "                </tr>\n"
-            + "            </thead>\n"
-            + "            <tbody>";
+            + "\n"
+            + "    <body>\n"
+            + "        <div class=\"container\">\n"
+            + "            <table>\n"
+            + "                <thead>\n"
+            + "                    <tr>\n"
+            + "                        <th>ID</th>\n"
+            + "                        <th>Nombre</th>\n"
+            + "                        <th>Valor</th>\n"
+            + "                        <th>Linea</th>\n"
+            + "                        <th>Columna</th>\n"
+            + "                    </tr>\n"
+            + "                </thead>\n"
+            + "                <tbody>";
         private string foo = "</tbody>\n"
-            + "        </table>\n"
-            + "    </section>\n"
+            + "            </table>\n"
+            + "        </div>\n"
+            + "    </body>\n"
+            + "    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js\"></script>\n"
             + "</body>\n"
             + "\n"
             + "</html>";
@@ -57,36 +53,30 @@ namespace proyecto1
             + "<html>\n"
             + "\n"
             + "<head>\n"
-            + "    <meta charset=\"utf-8\">\n"
-            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-            + "    <title>Hello Bulma!</title>\n"
-            + "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css\">\n"
+            + "    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">\n"
+            + "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css\">\n"
+            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n"
             + "</head>\n"
             + "\n"
             + "<body>\n"
-            + "    <nav class=\"navbar is-dark\" role=\"navigation\" aria-label=\"main navigation\">\n"
-            + "        <div class=\"navbar-brand\">\n"
-            + "            <a class=\"navbar-item\" href=\"https://bulma.io\">\n"
-            + "                <h2 class=\"is-white\">Compiladores</h2>\n"
-            + "            </a>\n"
-            + "            <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n"
-            + "                <span aria-hidden=\"true\"></span>\n"
-            + "                <span aria-hidden=\"true\"></span>\n"
-            + "                <span aria-hidden=\"true\"></span>\n"
-            + "            </a>\n"
+            + "    <nav>\n"
+            + "        <div class=\"nav-wrapper indigo darken-4\">\n"
+            + "            <a href=\"#\" class=\"brand-logo center\">Compiladores</a>\n"
             + "        </div>\n"
             + "    </nav>\n"
-            + "    <section class=\"is-full\">\n"
-            + "        <table class=\"table is-full\">\n"
-            + "            <thead>\n"
-            + "                <tr>\n"
-            + "                    <th><abbr>ID</abbr></th>\n"
-            + "                    <th><abbr title=\"Won\">Valor</abbr></th>\n"
-            + "                    <th><abbr title=\"Drawn\">Linea</abbr></th>\n"
-            + "                    <th><abbr title=\"Lost\">Columna</abbr></th>\n"
-            + "                </tr>\n"
-            + "            </thead>\n"
-            + "            <tbody>";
+            + "\n"
+            + "    <body>\n"
+            + "        <div class=\"container\">\n"
+            + "            <table>\n"
+            + "                <thead>\n"
+            + "                    <tr>\n"
+            + "                        <th>ID</th>\n"
+            + "                        <th>Valor</th>\n"
+            + "                        <th>Linea</th>\n"
+            + "                        <th>Columna</th>\n"
+            + "                    </tr>\n"
+            + "                </thead>\n"
+            + "                <tbody>";
         
 
         public void in_token(string nombre, string valor, int ln, int cl)
@@ -131,11 +121,11 @@ namespace proyecto1
                 for (int i = 0; i < tokens.Count; i++)
                 {
                     bw.WriteLine("<tr>");
-                    bw.WriteLine("<th>" + tokens.ElementAt(i)[0] + "</th>");
-                    bw.WriteLine("<td>" + tokens.ElementAt(i)[1] + "</th>");
-                    bw.WriteLine("<td>" + tokens.ElementAt(i)[2] + "</th>");
-                    bw.WriteLine("<td>" + tokens.ElementAt(i)[3] + "</th>");
-                    bw.WriteLine("<td>" + tokens.ElementAt(i)[4] + "</th>");
+                    bw.WriteLine("<th>" + tokens.ElementAt(i)[0] + "</td>");
+                    bw.WriteLine("<td>" + tokens.ElementAt(i)[1] + "</td>");
+                    bw.WriteLine("<td>" + tokens.ElementAt(i)[2] + "</td>");
+                    bw.WriteLine("<td>" + tokens.ElementAt(i)[3] + "</td>");
+                    bw.WriteLine("<td>" + tokens.ElementAt(i)[4] + "</td>");
                     bw.WriteLine("</tr>");
                 }
                 bw.WriteLine(foo);
@@ -159,10 +149,10 @@ namespace proyecto1
                 for (int i = 0; i < errores.Count; i++)
                 {
                     bw.WriteLine("<tr>");
-                    bw.WriteLine("<th>" + errores.ElementAt(i)[0] + "</th>");
-                    bw.WriteLine("<td>" + errores.ElementAt(i)[1] + "</th>");
-                    bw.WriteLine("<td>" + errores.ElementAt(i)[2] + "</th>");
-                    bw.WriteLine("<td>" + errores.ElementAt(i)[3] + "</th>");
+                    bw.WriteLine("<th>" + errores.ElementAt(i)[0] + "</td>");
+                    bw.WriteLine("<td>" + errores.ElementAt(i)[1] + "</td>");
+                    bw.WriteLine("<td>" + errores.ElementAt(i)[2] + "</td>");
+                    bw.WriteLine("<td>" + errores.ElementAt(i)[3] + "</td>");
                     bw.WriteLine("</tr>");
                 }
                 bw.WriteLine(foo);

@@ -142,33 +142,36 @@
             // ejecutarToolStripMenuItem
             // 
             this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
-            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ejecutarToolStripMenuItem.Text = "Ejecutar";
             // 
             // cargarTablasToolStripMenuItem
             // 
             this.cargarTablasToolStripMenuItem.Name = "cargarTablasToolStripMenuItem";
-            this.cargarTablasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.cargarTablasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cargarTablasToolStripMenuItem.Text = "Cargar tablas";
             this.cargarTablasToolStripMenuItem.Click += new System.EventHandler(this.cargarTablasToolStripMenuItem_Click);
             // 
             // verTokensToolStripMenuItem
             // 
             this.verTokensToolStripMenuItem.Name = "verTokensToolStripMenuItem";
-            this.verTokensToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.verTokensToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verTokensToolStripMenuItem.Text = "Ver tokens";
+            this.verTokensToolStripMenuItem.Click += new System.EventHandler(this.verTokensToolStripMenuItem_Click);
             // 
             // verErroresToolStripMenuItem
             // 
             this.verErroresToolStripMenuItem.Name = "verErroresToolStripMenuItem";
-            this.verErroresToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.verErroresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verErroresToolStripMenuItem.Text = "Ver errores";
+            this.verErroresToolStripMenuItem.Click += new System.EventHandler(this.verErroresToolStripMenuItem_Click);
             // 
             // verAstToolStripMenuItem
             // 
             this.verAstToolStripMenuItem.Name = "verAstToolStripMenuItem";
-            this.verAstToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.verAstToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verAstToolStripMenuItem.Text = "Ver ast";
+            this.verAstToolStripMenuItem.Click += new System.EventHandler(this.verAstToolStripMenuItem_Click);
             // 
             // verTablasToolStripMenuItem
             // 

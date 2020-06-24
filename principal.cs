@@ -87,9 +87,10 @@ namespace proyecto1
             lst.limpia_todo();
             lexer.analizador(text_input + " ");
             //await
-            lst.print_lst();
+            //lst.print_lst();
             sint.start_x();
             lst.render_tokens();
+            lst.render_errores();
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -208,6 +209,21 @@ namespace proyecto1
         {
             table_rs.graph_tables();
             Process.Start("tablas.html");
+        }
+
+        private void verAstToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("ast.png");
+        }
+
+        private void verTokensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("201700317_tok.html");
+        }
+
+        private void verErroresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("201700317_tok.html");
         }
     }
 }

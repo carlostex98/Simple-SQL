@@ -57,6 +57,7 @@ namespace proyecto1
 
         void main_x()
         {
+            tmp_log.Clear();
             //this correspond to the base lang start
             if (is_same("crear"))
             {
@@ -411,6 +412,7 @@ namespace proyecto1
             }
             else if (is_same("seleccionar"))
             {
+                
                 string t4 = "";
                 next_t();
                 nodos.AddLast("e" + n.ToString() + "[label=\"SELECCIONAR \"];\n");
@@ -988,7 +990,19 @@ namespace proyecto1
                 bw.WriteLine("}");
 
 
-                Process cmd = new Process();
+                //Process.Start("dot " + file_name + " -Tpng -o ast.png");
+
+
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = "/C dot " + file_name + " -Tpng -o ast.png";
+                process.StartInfo = startInfo;
+                process.Start();
+
+
+                /*Process cmd = new Process();
                 cmd.StartInfo.FileName = "cmd.exe";
                 cmd.StartInfo.RedirectStandardInput = true;
                 cmd.StartInfo.RedirectStandardOutput = true;
@@ -996,11 +1010,11 @@ namespace proyecto1
                 cmd.StartInfo.UseShellExecute = false;
                 cmd.Start();
 
-                cmd.StandardInput.WriteLine("dot " + file_name + " -Tpng -o ast.png");
+                cmd.StandardInput.WriteLine("/C dot " + file_name + " -Tpng -o ast.png");
                 cmd.StandardInput.Flush();
                 cmd.StandardInput.Close();
-                cmd.WaitForExit();
-                Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+                cmd.WaitForExit();*/
+
 
 
             }

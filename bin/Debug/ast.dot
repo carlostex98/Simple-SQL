@@ -19,29 +19,97 @@ e7[label=" Pepito G?menez "];
 
 e8[label=" 02/02/2012 "];
 
-e9[label="ACTUALIZAR TABLA - Estudiantes "];
+e9[label="INSERTAR EN TABLA - Estudiantes "];
 
-e10[label="SETERS "];
+e10[label="VALORES TABLA "];
 
-e11[label=" nombre -> Alejandro "];
+e11[label=" 1 "];
 
-e12[label="CONDICIONAL "];
+e12[label=" Pepito G?menez1 "];
 
-e13[label=" id_estudiante = 0 "];
+e13[label=" 02/07/2012 "];
 
-e14[label="SELECCIONAR "];
+e14[label="INSERTAR EN TABLA - Estudiantes "];
 
-e15[label="COLUMNAS"];
+e15[label="VALORES TABLA "];
 
-e16[label="*"];
+e16[label=" 2 "];
 
-e17[label="TABLAS"];
+e17[label=" Pepito G?menez2 "];
 
-e18[label=" Estudiantes "];
+e18[label=" 02/08/2012 "];
 
-e19[label="CONDICIONAL "];
+e19[label="INSERTAR EN TABLA - Estudiantes "];
 
-e20[label=" Id_estudiante >= 0 "];
+e20[label="VALORES TABLA "];
+
+e21[label=" 3 "];
+
+e22[label=" Pepito G?menez3 "];
+
+e23[label=" 02/09/2012 "];
+
+e24[label="INSERTAR EN TABLA - Estudiantes "];
+
+e25[label="VALORES TABLA "];
+
+e26[label=" 4 "];
+
+e27[label=" Pepito G?menez4 "];
+
+e28[label=" 02/10/2012 "];
+
+e29[label="INSERTAR EN TABLA - Estudiantes "];
+
+e30[label="VALORES TABLA "];
+
+e31[label=" 5 "];
+
+e32[label=" Pepito G?menez5 "];
+
+e33[label=" 02/12/2012 "];
+
+e34[label="INSERTAR EN TABLA - Estudiantes "];
+
+e35[label="VALORES TABLA "];
+
+e36[label=" 6 "];
+
+e37[label=" Pepito G?menez6 "];
+
+e38[label=" 02/12/2012 "];
+
+e39[label="INSERTAR EN TABLA - Estudiantes "];
+
+e40[label="VALORES TABLA "];
+
+e41[label=" 7 "];
+
+e42[label=" Pepito G?menez7 "];
+
+e43[label=" 02/02/2012 "];
+
+e44[label="ACTUALIZAR TABLA - Estudiantes "];
+
+e45[label="SETERS "];
+
+e46[label=" nombre -> Alejandro "];
+
+e47[label="CONDICIONAL "];
+
+e48[label=" id_estudiante > 4 "];
+
+e49[label="ELIMINAR EN TABLA - estudiantes "];
+
+e50[label="SELECCIONAR "];
+
+e51[label="COLUMNAS"];
+
+e52[label="*"];
+
+e53[label="TABLAS"];
+
+e54[label=" Estudiantes "];
 
 ex0 -> e0; 
 
@@ -67,9 +135,9 @@ e9 -> e10;
 
 e10 -> e11; 
 
-e9 -> e12; 
+e10 -> e12; 
 
-e12 -> e13; 
+e10 -> e13; 
 
 ex0 -> e14; 
 
@@ -77,12 +145,80 @@ e14 -> e15;
 
 e15 -> e16; 
 
-e14 -> e17; 
+e15 -> e17; 
 
-e17 -> e18; 
+e15 -> e18; 
 
-e14 -> e19; 
+ex0 -> e19; 
 
 e19 -> e20; 
+
+e20 -> e21; 
+
+e20 -> e22; 
+
+e20 -> e23; 
+
+ex0 -> e24; 
+
+e24 -> e25; 
+
+e25 -> e26; 
+
+e25 -> e27; 
+
+e25 -> e28; 
+
+ex0 -> e29; 
+
+e29 -> e30; 
+
+e30 -> e31; 
+
+e30 -> e32; 
+
+e30 -> e33; 
+
+ex0 -> e34; 
+
+e34 -> e35; 
+
+e35 -> e36; 
+
+e35 -> e37; 
+
+e35 -> e38; 
+
+ex0 -> e39; 
+
+e39 -> e40; 
+
+e40 -> e41; 
+
+e40 -> e42; 
+
+e40 -> e43; 
+
+ex0 -> e44; 
+
+e44 -> e45; 
+
+e45 -> e46; 
+
+e44 -> e47; 
+
+e47 -> e48; 
+
+ex0 -> e49; 
+
+ex0 -> e50; 
+
+e50 -> e51; 
+
+e51 -> e52; 
+
+e50 -> e53; 
+
+e53 -> e54; 
 
 }

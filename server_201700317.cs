@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -90,6 +91,8 @@ namespace proyecto1
                     }
                     bw.Close();
 
+
+
                     break;
                 }
                 vista = vista.sig;
@@ -106,12 +109,12 @@ namespace proyecto1
             {
                 if (vista.nombre.Equals(name, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    
+
                     logic_filter(name, conditions);
                     for (int i = 0; i < vista.content.Count; i++)
                     {
 
-                        if (tmp.Count==0 && conditions.Length==0)
+                        if (tmp.Count == 0 && conditions.Length == 0)
                         {
                             //all
                             for (int j = 0; j < vista.content.Count; j++)
@@ -131,10 +134,11 @@ namespace proyecto1
                             }
                         }
 
-                        
+
                     }
-                    
+
                     consulta_todo(name);
+                    Process.Start(name + ".html");
                     break;
                 }
                 vista = vista.sig;
@@ -198,8 +202,8 @@ namespace proyecto1
                     Console.WriteLine(tmp.Count);
                     for (int i = 0; i < vista.content.Count; i++)
                     {
-                        string[] s = new string[vista.content.ElementAt(i).Length];
-                        s = vista.content.ElementAt(i);
+                        string[] s = vista.content.ElementAt(i);
+
                         for (int j = 0; j < tmp.Count; j++)
                         {
                             if (i == tmp.ElementAt(j))
@@ -207,7 +211,7 @@ namespace proyecto1
                                 //do the update
                                 //new values
                                 //do replace
-                                for (int k = 0; k < setter.Length/2; k++)
+                                for (int k = 0; k < setter.Length / 2; k++)
                                 {
                                     s[return_index_col(vista, setter[k, 0], i)] = setter[k, 1];
                                 }
@@ -241,7 +245,15 @@ namespace proyecto1
             {
                 if (vista.nombre.Equals(tabla, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    logic_filter(tabla, conditions);
+                    if (conditions.Length==0)
+                    {
+                        vista.content.Clear();
+                    }
+                    else
+                    {
+                        logic_filter(tabla, conditions);
+                    }
+
                     for (int i = 0; i < vista.content.Count; i++)
                     {
                         for (int j = 0; j < tmp.Count; j++)
@@ -270,7 +282,7 @@ namespace proyecto1
         private void logic_filter(string tabla, string[,] conditions)
         {
             bool t = true;
-            bool f = false;
+
             tabla vista = primero;
             while (vista != null)
             {
@@ -284,12 +296,13 @@ namespace proyecto1
 
                     for (int i = 0; i < vista.content.Count; i++)
                     {
-                        for (int j = 0; j < conditions.Length/4; j++)
+                        for (int j = 0; j < conditions.Length / 4; j++)
                         {
                             switch (conditions[j, 1])
                             {
                                 case ">":
                                     //numeric or date
+                                   
                                     if (num_val(remove_date(conditions[j, 2])))//reported
                                     {
                                         if (num_val(remove_date(ret_val_tab(vista, conditions[j, 0], i))))//requested
@@ -298,22 +311,51 @@ namespace proyecto1
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && true;
+                                                    }
+
                                                 }
                                                 else
                                                 {
-                                                    t = t || true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || true;
+                                                    }
                                                 }
                                             }
                                             else
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && false;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || false;
+                                                    }
                                                 }
                                             }
                                         }
@@ -337,22 +379,50 @@ namespace proyecto1
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && true;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || true;
+                                                    }
                                                 }
                                             }
                                             else
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && false;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || false;
+                                                    }
                                                 }
                                             }
                                         }
@@ -375,22 +445,50 @@ namespace proyecto1
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && true;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || true;
+                                                    }
                                                 }
                                             }
                                             else
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && false;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || false;
+                                                    }
                                                 }
                                             }
                                         }
@@ -415,22 +513,50 @@ namespace proyecto1
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && true;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || true;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || true;
+                                                    }
                                                 }
                                             }
                                             else
                                             {
                                                 if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                                 {
-                                                    t = t && false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t && false;
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    t = t || false;
+                                                    if (conditions.Length == 4)
+                                                    {
+                                                        t = false;
+                                                    }
+                                                    else
+                                                    {
+                                                        t = t || false;
+                                                    }
                                                 }
                                             }
                                         }
@@ -446,55 +572,112 @@ namespace proyecto1
                                     break;
                                 case "=":
                                     //string 
-                                    
+                                    Console.WriteLine(conditions[j, 2]);
+                                    Console.WriteLine(ret_val_tab(vista, conditions[j, 0], i));
                                     if (conditions[j, 2].Equals(ret_val_tab(vista, conditions[j, 0], i), StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        
+
                                         //means true
                                         if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
-                                            t = t && true;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = true;
+                                            }
+                                            else
+                                            {
+                                                t = t && true;
+                                            }
                                         }
                                         else
                                         {
-                                            t = t || true;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = true;
+                                            }
+                                            else
+                                            {
+                                                t = t || true;
+                                            }
                                         }
                                     }
                                     else
                                     {
                                         if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
-                                            t = t && false;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = false;
+                                            }
+                                            else
+                                            {
+                                                t = t && false;
+                                            }
                                         }
                                         else
                                         {
-                                            t = t || false;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = false;
+                                            }
+                                            else
+                                            {
+                                                t = t && false;
+                                            }
                                         }
                                     }
                                     break;
                                 case "!=":
                                     //string 
-                                    if (!conditions[j, i].Equals(ret_val_tab(vista, conditions[j, 0], i), StringComparison.InvariantCultureIgnoreCase))
+                                    if (!conditions[j, 2].Equals(ret_val_tab(vista, conditions[j, 0], i), StringComparison.InvariantCultureIgnoreCase))
                                     {
                                         //means true
                                         if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
-                                            t = t && true;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = true;
+                                            }
+                                            else
+                                            {
+                                                t = t && true;
+                                            }
                                         }
                                         else
                                         {
-                                            t = t || true;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = true;
+                                            }
+                                            else
+                                            {
+                                                t = t || true;
+                                            }
                                         }
                                     }
                                     else
                                     {
                                         if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
-                                            t = t && false;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = false;
+                                            }
+                                            else
+                                            {
+                                                t = t && false;
+                                            }
                                         }
                                         else
                                         {
-                                            t = t || false;
+                                            if (conditions.Length == 4)
+                                            {
+                                                t = false;
+                                            }
+                                            else
+                                            {
+                                                t = t || false;
+                                            }
                                         }
                                     }
                                     break;
@@ -517,7 +700,7 @@ namespace proyecto1
             String h = "";
             for (int i = 0; i < tmp.headers.Count; i++)
             {
-               
+
                 if (tmp.headers.ElementAt(i).Equals(col_header, StringComparison.InvariantCultureIgnoreCase))
                 {
                     h = tmp.content.ElementAt(index)[i];
@@ -557,7 +740,7 @@ namespace proyecto1
             if (c == 0 || c == 1)
             {
                 s = true;
-                Console.WriteLine(dta);
+                
                 for (int i = 0; i < dta.Length; i++)
                 {
                     if (!(char.IsDigit(dta[i]) || dta[i] == '.'))
