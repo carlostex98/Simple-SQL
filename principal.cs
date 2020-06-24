@@ -26,7 +26,7 @@ namespace proyecto1
         private void button1_Click(object sender, EventArgs e)
         {
             //link to the other class
-            logChanges.Text = "s";
+            logChanges.Text = logChanges.Text+"Compilando\n";
             parse_to_end(editor.Text + " ");
 
         }
@@ -203,6 +203,7 @@ namespace proyecto1
         private void button2_Click_1(object sender, EventArgs e)
         {
             parse_to_end(editor.SelectedText + " ");
+            logChanges.Text = logChanges.Text + "Compilando\n";
         }
 
         private void verTablasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,7 +224,13 @@ namespace proyecto1
 
         private void verErroresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("201700317_tok.html");
+            Process.Start("201700317_err.html");
+        }
+
+        private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logChanges.Text = logChanges.Text + "Compilando\n";
+            parse_to_end(editor.Text + " ");
         }
     }
 }

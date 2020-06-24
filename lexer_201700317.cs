@@ -40,9 +40,10 @@ namespace proyecto1
                             //multiline
                             e = 2;
                         }
-                        else if (char.IsDigit(c))
+                        else if (char.IsDigit(c)||c=='-')
                         {
                             //number digit or float
+                            //accept negatives
                             e = 3;
                             f += c;
                         }

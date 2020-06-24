@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,6 +29,8 @@ namespace proyecto1
         int p2 = 0;
         int p3 = 0;
 
+        bool m = true;
+
         bool s = true;
         int x = 0;
         int n = 0;
@@ -58,6 +59,7 @@ namespace proyecto1
         void main_x()
         {
             tmp_log.Clear();
+            m = true;
             //this correspond to the base lang start
             if (is_same("crear"))
             {
@@ -380,9 +382,9 @@ namespace proyecto1
                     {
                         for (int j = 0; j < tmp_log.ElementAt(i).Length; j++)
                         {
-                            g[i,j] = tmp_log.ElementAt(i)[j];
+                            g[i, j] = tmp_log.ElementAt(i)[j];
                         }
-                        
+
                     }
                     for (int i = 0; i < tmp_set.Count; i++)
                     {
@@ -393,7 +395,7 @@ namespace proyecto1
 
                     }
 
-                    principal.dbms.update_record(tab_name,g, g2);
+                    principal.dbms.update_record(tab_name, g, g2);
 
                     next_t();
                 }
@@ -412,7 +414,7 @@ namespace proyecto1
             }
             else if (is_same("seleccionar"))
             {
-                
+
                 string t4 = "";
                 next_t();
                 nodos.AddLast("e" + n.ToString() + "[label=\"SELECCIONAR \"];\n");
@@ -445,8 +447,8 @@ namespace proyecto1
                     rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                     p2 = n;
                     n++;
-                    
-                    
+
+
                     next_t();
                     tab_name = ret_curr()[2];
 
@@ -479,14 +481,14 @@ namespace proyecto1
                     string[,] g = new string[tmp_log.Count, 4];
                     for (int i = 0; i < tmp_log.Count; i++)
                     {
-                        
+
                         for (int j = 0; j < tmp_log.ElementAt(i).Length; j++)
                         {
                             g[i, j] = tmp_log.ElementAt(i)[j];
                         }
 
                     }
-                    
+
                     principal.dbms.select_builder(tab_name, g);
                     next_t();
                 }
@@ -769,7 +771,7 @@ namespace proyecto1
             {
                 //get id
                 t1 = ret_curr()[2];
-                
+
                 principal.dbms.add_header_last(ret_curr()[2]);
                 next_t();
             }
@@ -951,20 +953,26 @@ namespace proyecto1
         {
             //manage
             //run until ';' or 'EOF'
-            Console.WriteLine(ret_curr()[0]);
 
-            while (!ret_curr()[2].Equals(";"))
+            if (m)
             {
-                next_t();
-                Console.WriteLine("siu");
-                if (ret_curr()[2].Equals("EOF"))
+                principal.lst.in_error(ret_curr()[2], int.Parse(ret_curr()[3]), int.Parse(ret_curr()[4]));
+                while (!ret_curr()[2].Equals(";"))
                 {
-                    break;
-                }
+                    next_t();
+                    Console.WriteLine("siu");
+                    if (ret_curr()[2].Equals("EOF"))
+                    {
+                        break;
+                    }
 
+                }
+                //if ok -> ; or EOF
+                next_t();
+                m = false;
             }
-            //if ok -> ; or EOF
-            next_t();
+
+            
 
         }
 
@@ -990,9 +998,6 @@ namespace proyecto1
                 bw.WriteLine("}");
 
 
-                //Process.Start("dot " + file_name + " -Tpng -o ast.png");
-
-
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
@@ -1000,21 +1005,6 @@ namespace proyecto1
                 startInfo.Arguments = "/C dot " + file_name + " -Tpng -o ast.png";
                 process.StartInfo = startInfo;
                 process.Start();
-
-
-                /*Process cmd = new Process();
-                cmd.StartInfo.FileName = "cmd.exe";
-                cmd.StartInfo.RedirectStandardInput = true;
-                cmd.StartInfo.RedirectStandardOutput = true;
-                cmd.StartInfo.CreateNoWindow = true;
-                cmd.StartInfo.UseShellExecute = false;
-                cmd.Start();
-
-                cmd.StandardInput.WriteLine("/C dot " + file_name + " -Tpng -o ast.png");
-                cmd.StandardInput.Flush();
-                cmd.StandardInput.Close();
-                cmd.WaitForExit();*/
-
 
 
             }
