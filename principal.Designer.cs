@@ -173,8 +173,9 @@
             // verTablasToolStripMenuItem
             // 
             this.verTablasToolStripMenuItem.Name = "verTablasToolStripMenuItem";
-            this.verTablasToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.verTablasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verTablasToolStripMenuItem.Text = "Ver tablas";
+            this.verTablasToolStripMenuItem.Click += new System.EventHandler(this.verTablasToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 

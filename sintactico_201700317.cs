@@ -146,7 +146,8 @@ namespace proyecto1
                 if (s && is_type("identificador"))
                 {
                     //get id
-                    t1 = ret_curr()[2];
+                    //t1 = ret_curr()[2];
+                    tab_name = ret_curr()[2];
                     nodos.AddLast("e" + n.ToString() + "[label=\"INSERTAR EN TABLA - " + ret_curr()[2] + " \"];\n");
                     rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
                     p1 = n;
@@ -410,6 +411,7 @@ namespace proyecto1
             }
             else if (is_same("seleccionar"))
             {
+                string t4 = "";
                 next_t();
                 nodos.AddLast("e" + n.ToString() + "[label=\"SELECCIONAR \"];\n");
                 rels.AddLast("ex0 -> e" + n.ToString() + "; \n");
@@ -427,6 +429,7 @@ namespace proyecto1
                     rels.AddLast("e" + p2.ToString() + " -> e" + n.ToString() + "; \n");
                     n++;
                     next_t();
+                    Console.WriteLine("e453");
                 }
                 else
                 {
@@ -440,9 +443,12 @@ namespace proyecto1
                     rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                     p2 = n;
                     n++;
-
-
+                    
+                    
                     next_t();
+                    tab_name = ret_curr()[2];
+
+                    t4 = ret_curr()[2];
                     //call table array
                     table_array();
                 }
@@ -450,6 +456,7 @@ namespace proyecto1
                 {
                     s = false;
                     error_panic();
+                    Console.WriteLine("e");
                 }
 
                 if (s && is_same("donde"))
@@ -458,7 +465,8 @@ namespace proyecto1
                     rels.AddLast("e" + p1.ToString() + " -> e" + n.ToString() + "; \n");
                     p1 = n;
                     n++;
-
+                    t3 = "Y";
+                    tmp_log.Clear();
                     next_t();
                     logic_expr_del();
                 }//without else
@@ -466,12 +474,25 @@ namespace proyecto1
                 if (is_same(";"))
                 {
                     //end of line
+                    string[,] g = new string[tmp_log.Count, 4];
+                    for (int i = 0; i < tmp_log.Count; i++)
+                    {
+                        
+                        for (int j = 0; j < tmp_log.ElementAt(i).Length; j++)
+                        {
+                            g[i, j] = tmp_log.ElementAt(i)[j];
+                        }
 
+                    }
+                    
+                    principal.dbms.select_builder(tab_name, g);
+                    next_t();
                 }
                 else
                 {
                     s = false;
                     error_panic();
+                    Console.WriteLine("e");
                 }
                 s = true;
                 if (!is_same("EOF"))
@@ -504,6 +525,7 @@ namespace proyecto1
             }
             else
             {
+                Console.WriteLine("mm1");
                 s = false;
                 error_panic();
             }
@@ -745,8 +767,9 @@ namespace proyecto1
             {
                 //get id
                 t1 = ret_curr()[2];
-                next_t();
+                
                 principal.dbms.add_header_last(ret_curr()[2]);
+                next_t();
             }
             else
             {
@@ -822,7 +845,7 @@ namespace proyecto1
                     z[i] = tmp1.ElementAt(i);
                 }
                 tmp1.Clear();
-                principal.dbms.insert_record(t1, z);
+                principal.dbms.insert_record(tab_name, z);
             }
         }
 
@@ -926,7 +949,8 @@ namespace proyecto1
         {
             //manage
             //run until ';' or 'EOF'
-            Console.WriteLine(ret_curr()[2]);
+            Console.WriteLine(ret_curr()[0]);
+
             while (!ret_curr()[2].Equals(";"))
             {
                 next_t();

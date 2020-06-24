@@ -48,19 +48,16 @@ namespace proyecto1
                 bw.WriteLine(head);
                 while (vista != null)//for each table
                 {
-                    bw.WriteLine("<ul class=\"collection with - header \">");
-                    bw.WriteLine("<li class=\"collection - header\">");
+                    bw.WriteLine("<ul class=\"collection with-header \">");
+                    bw.WriteLine("<li class=\"collection-header\">");
                     bw.WriteLine("<h4>" + vista.nombre + "</h4>");
                     bw.WriteLine("</li>");
 
                     for (int i = 0; i < vista.headers.Count; i++)
                     {
-                        bw.WriteLine("<li class=\"collection - item\">" + vista.headers.ElementAt(i) + "<span class=\"new badge indigo darken - 4\" data-badge-caption=\"\">"+vista.data_type.ElementAt(i)+"</span></li>");
+                        bw.WriteLine("<li class=\"collection-item\">" + vista.headers.ElementAt(i) + "<span class=\"new badge indigo darken-4\" data-badge-caption=\"\">" + vista.data_type.ElementAt(i) + "</span></li>");
                     }
 
-
-                    bw.WriteLine("");
-                    bw.WriteLine("");
 
                     bw.WriteLine("</ul>");
 
@@ -77,6 +74,17 @@ namespace proyecto1
 
 
 
+        }
+
+
+        public void tablej()
+        {
+            tabla n = principal.dbms.ret_first();
+            while (n!=null)
+            {
+
+                n = n.sig;
+            }
         }
 
 

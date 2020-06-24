@@ -43,13 +43,14 @@ namespace proyecto1
 
         public void consulta_todo(string name)
         {
+            Console.WriteLine("c");
             tabla vista = primero;
             while (vista != null)
             {
                 if (vista.nombre.Equals(name, StringComparison.InvariantCultureIgnoreCase))
                 {
                     //render
-                    tmp2.Clear();
+                    //tmp2.Clear();
                     //first the headers
                     //the the results
                     Encoding ascii = Encoding.ASCII;
@@ -69,12 +70,12 @@ namespace proyecto1
                         bw.WriteLine("</thead>");
                         //the end
                         bw.WriteLine("<tbody>");
-                        for (int i = 0; i < vista.content.Count; i++)
+                        for (int i = 0; i < tmp2.Count; i++)
                         {
                             bw.WriteLine("<tr>");
-                            for (int j = 0; j < vista.content.ElementAt(i).Length; j++)
+                            for (int j = 0; j < tmp2.ElementAt(i).Length; j++)
                             {
-                                bw.WriteLine("<td>" + vista.content.ElementAt(i)[j] + "</td>");
+                                bw.WriteLine("<td>" + tmp2.ElementAt(i)[j] + "</td>");
                             }
                             bw.WriteLine("</tr>");
                         }
@@ -99,30 +100,40 @@ namespace proyecto1
         {
             tmp.Clear();
             tmp2.Clear();
-
             //with the selected ones
             tabla vista = primero;
             while (vista != null)
             {
                 if (vista.nombre.Equals(name, StringComparison.InvariantCultureIgnoreCase))
                 {
+                    
                     logic_filter(name, conditions);
                     for (int i = 0; i < vista.content.Count; i++)
                     {
-                        for (int j = 0; j < tmp.Count; j++)
+
+                        if (tmp.Count==0 && conditions.Length==0)
                         {
-                            if (i == tmp.ElementAt(j))
+                            //all
+                            for (int j = 0; j < vista.content.Count; j++)
                             {
-                                //do something
                                 tmp2.AddLast(vista.content.ElementAt(i));
                             }
                         }
+                        else
+                        {
+                            for (int j = 0; j < tmp.Count; j++)
+                            {
+                                if (i == tmp.ElementAt(j))
+                                {
+                                    //do something
+                                    tmp2.AddLast(vista.content.ElementAt(i));
+                                }
+                            }
+                        }
+
+                        
                     }
-                    vista.content.Clear();
-                    for (int i = 0; i < tmp2.Count; i++)
-                    {
-                        vista.content.AddLast(tmp2.ElementAt(i));
-                    }
+                    
                     consulta_todo(name);
                     break;
                 }
@@ -145,6 +156,7 @@ namespace proyecto1
                 tabla nuevo = new tabla();
                 nuevo.nombre = name;
                 ultimo.sig = nuevo;
+                ultimo = nuevo;
             }
         }
 
@@ -166,6 +178,7 @@ namespace proyecto1
             {
                 if (vista.nombre.Equals(name, StringComparison.InvariantCultureIgnoreCase))
                 {
+                    //Console.WriteLine("rrrrr");
                     vista.content.AddLast(values);
                     break;
                 }
@@ -182,6 +195,7 @@ namespace proyecto1
                 if (vista.nombre.Equals(tabla, StringComparison.InvariantCultureIgnoreCase))
                 {
                     logic_filter(tabla, conditions);
+                    Console.WriteLine(tmp.Count);
                     for (int i = 0; i < vista.content.Count; i++)
                     {
                         string[] s = new string[vista.content.ElementAt(i).Length];
@@ -193,7 +207,7 @@ namespace proyecto1
                                 //do the update
                                 //new values
                                 //do replace
-                                for (int k = 0; k < setter.Length; k++)
+                                for (int k = 0; k < setter.Length/2; k++)
                                 {
                                     s[return_index_col(vista, setter[k, 0], i)] = setter[k, 1];
                                 }
@@ -270,7 +284,7 @@ namespace proyecto1
 
                     for (int i = 0; i < vista.content.Count; i++)
                     {
-                        for (int j = 0; j < conditions.Length; j++)
+                        for (int j = 0; j < conditions.Length/4; j++)
                         {
                             switch (conditions[j, 1])
                             {
@@ -432,8 +446,10 @@ namespace proyecto1
                                     break;
                                 case "=":
                                     //string 
-                                    if (conditions[j, i].Equals(ret_val_tab(vista, conditions[j, 0], i), StringComparison.InvariantCultureIgnoreCase))
+                                    
+                                    if (conditions[j, 2].Equals(ret_val_tab(vista, conditions[j, 0], i), StringComparison.InvariantCultureIgnoreCase))
                                     {
+                                        
                                         //means true
                                         if (conditions[j, 3].Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                                         {
@@ -501,6 +517,7 @@ namespace proyecto1
             String h = "";
             for (int i = 0; i < tmp.headers.Count; i++)
             {
+               
                 if (tmp.headers.ElementAt(i).Equals(col_header, StringComparison.InvariantCultureIgnoreCase))
                 {
                     h = tmp.content.ElementAt(index)[i];
@@ -540,9 +557,10 @@ namespace proyecto1
             if (c == 0 || c == 1)
             {
                 s = true;
+                Console.WriteLine(dta);
                 for (int i = 0; i < dta.Length; i++)
                 {
-                    if (!char.IsDigit(dta[i]) || dta[i] != '.')
+                    if (!(char.IsDigit(dta[i]) || dta[i] == '.'))
                     {
                         s = false;
                         break;

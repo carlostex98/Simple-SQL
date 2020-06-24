@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -12,10 +13,8 @@ namespace proyecto1
         public static lexer_201700317 lexer = new lexer_201700317();
         public static sintactico_201700317 sint = new sintactico_201700317();
         public static server_201700317 dbms = new server_201700317();
-        string[] res = {"CREAR", "TABLA", "INSERTAR", "EN", "VALORES", "SELECCIONAR", "COMO", "DE", "DONDE",
-                        "Y", "O", "ELIMINAR", "ACTUALIZAR", "ESTABLECER", "ENTERO", "CADENA", "FLOTANTE", "FECHA"
-                        };//reservadas
-        string[] sim = { ">", "<", "=", "!", "*", ",", ";", ".", "(", ")" };
+        public static table_render table_rs = new table_render();
+
         private string file_name = "Default";
 
         public principal()
@@ -205,7 +204,10 @@ namespace proyecto1
             parse_to_end(editor.SelectedText + " ");
         }
 
-        
-
+        private void verTablasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            table_rs.graph_tables();
+            Process.Start("tablas.html");
+        }
     }
 }

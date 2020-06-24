@@ -1,40 +1,88 @@
 digraph D {
 node [shape=box];
 ex0 [label=" MAIN PROGRAM "];
-e0[label="SELECCIONAR "];
+e0[label="TABLA - Estudiantes "];
 
-e1[label="COLUMNAS"];
+e1[label=" Id_estudiante- entero "];
 
-e2[label="*"];
+e2[label=" Nombre- cadena "];
 
-e3[label="TABLAS"];
+e3[label=" Fecha_nacimiento- fecha "];
 
-e4[label=" Estudiantes "];
+e4[label="INSERTAR EN TABLA - Estudiantes "];
 
-e5[label="CONDICIONAL "];
+e5[label="VALORES TABLA "];
 
-e6[label=" id_estudiante > 10 "];
+e6[label=" 0 "];
 
-e7[label=" Y "];
+e7[label=" Pepito G?menez "];
 
-e8[label=" Fecha_nacimiento != 21/12/2012 "];
+e8[label=" 02/02/2012 "];
+
+e9[label="ACTUALIZAR TABLA - Estudiantes "];
+
+e10[label="SETERS "];
+
+e11[label=" nombre -> Alejandro "];
+
+e12[label="CONDICIONAL "];
+
+e13[label=" id_estudiante = 0 "];
+
+e14[label="SELECCIONAR "];
+
+e15[label="COLUMNAS"];
+
+e16[label="*"];
+
+e17[label="TABLAS"];
+
+e18[label=" Estudiantes "];
+
+e19[label="CONDICIONAL "];
+
+e20[label=" Id_estudiante >= 0 "];
 
 ex0 -> e0; 
 
 e0 -> e1; 
 
-e1 -> e2; 
+e0 -> e2; 
 
 e0 -> e3; 
 
-e3 -> e4; 
+ex0 -> e4; 
 
-e0 -> e5; 
+e4 -> e5; 
+
+e5 -> e6; 
 
 e5 -> e7; 
 
-e7 -> e6; 
+e5 -> e8; 
 
-e7 -> e8; 
+ex0 -> e9; 
+
+e9 -> e10; 
+
+e10 -> e11; 
+
+e9 -> e12; 
+
+e12 -> e13; 
+
+ex0 -> e14; 
+
+e14 -> e15; 
+
+e15 -> e16; 
+
+e14 -> e17; 
+
+e17 -> e18; 
+
+e14 -> e19; 
+
+e19 -> e20; 
 
 }
