@@ -88,6 +88,7 @@ namespace proyecto1
                         else
                         {
                             //error jaja
+                            principal.lst.in_error(c.ToString(),ln,cl);
                         }
                         break;
                     case 1:
