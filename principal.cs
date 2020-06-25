@@ -23,6 +23,14 @@ namespace proyecto1
             fileN.Text = file_name;
         }
 
+        public lexer_201700317 lexer_201700317
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //link to the other class
@@ -231,6 +239,16 @@ namespace proyecto1
         {
             logChanges.Text = logChanges.Text + "Compilando\n";
             parse_to_end(editor.Text + " ");
+        }
+
+        private void tecnicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("Tecnico.pdf");
+        }
+
+        private void usuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("Usuario.pdf");
         }
     }
 }

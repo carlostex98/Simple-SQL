@@ -13,5 +13,21 @@ namespace proyecto1
         public LinkedList<string> headers = new LinkedList<string>();
         public LinkedList<string> data_type = new LinkedList<string>();
         public LinkedList<string[]> content = new LinkedList<string[]>();
+
+        public principal principal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public server_201700317 server_201700317
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

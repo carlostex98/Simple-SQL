@@ -36,6 +36,22 @@ namespace proyecto1
             + "\n"
             + "</html>";
 
+        public principal principal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public tabla tabla
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void graph_tables()
         {
             tabla vista = principal.dbms.ret_first();

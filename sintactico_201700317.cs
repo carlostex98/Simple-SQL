@@ -35,6 +35,29 @@ namespace proyecto1
         int x = 0;
         int n = 0;
 
+        public listas listas
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public server_201700317 server_201700317
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public tabla tabla
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         void clean_all()
         {

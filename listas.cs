@@ -77,7 +77,14 @@ namespace proyecto1
             + "                    </tr>\n"
             + "                </thead>\n"
             + "                <tbody>";
-        
+
+        public lexer_201700317 lexer_201700317
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public void in_token(string nombre, string valor, int ln, int cl)
         {

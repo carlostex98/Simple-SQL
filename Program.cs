@@ -8,6 +8,14 @@ namespace proyecto1
 {
     static class Program
     {
+        public static principal principal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>

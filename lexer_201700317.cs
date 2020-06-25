@@ -11,6 +11,15 @@ namespace proyecto1
         string f = "";
         int ln = 1;
         int cl = 1;
+
+        public principal principal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public void analizador(string data)
         {
             char c = ' ';

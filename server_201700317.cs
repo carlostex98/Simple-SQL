@@ -41,6 +41,21 @@ namespace proyecto1
             + "\n"
             + "</html>";
 
+        public principal principal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public tabla tabla
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public void consulta_todo(string name)
         {
